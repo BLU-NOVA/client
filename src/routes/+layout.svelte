@@ -1,13 +1,15 @@
 <script>
   import "../app.css";
-  import Navbar from "../components/Navbar.svelte";
+  import Navbar from "$lib/Navbar.svelte";
+  import Footer from "$lib/Footer.svelte";
 </script>
 
-<main class="flex flex-col w-full">
-  <div class="container w-[100vw] h-[20%]">
+<main class="flex flex-col bg-deep-space-blue">
+  <div class="  h-[20%]">
     <Navbar />
   </div>
   <div class="bg-[#1B264C]">
     <slot />
   </div>
+  <Footer />
 </main>
