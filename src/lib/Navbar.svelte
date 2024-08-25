@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { page } from "$app/stores";
+
   let isMenuOpen: boolean = false;
 
   const toggleMenu = () => {
@@ -7,7 +9,7 @@
 </script>
 
 <nav
-  class="bg-deep-space-blue text-nova-white p-4 fixed top-0 left-0 z-50 w-full opacity-95"
+  class="bg-deep-space-blue text-nova-white p-4 sticky top-0 left-0 w-full opacity-95"
 >
   <div class={`container mx-auto flex flex-wrap justify-between `}>
     <div class={`flex  ${isMenuOpen ? "max-md:hidden" : ""}`}>
@@ -17,7 +19,7 @@
         class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] animate-spin"
       />
       <div class={`text-electric-blue font-bold text-lg sm:text-xl sm:mt-2`}>
-        BLU NOVA
+        <a href="/"> BLU NOVA</a>
       </div>
     </div>
 
@@ -46,17 +48,25 @@
     <ul
       class={`sm:flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mt-4 sm:mt-0 ${isMenuOpen ? "block" : "hidden"}`}
     >
-      <li class="hover:text-comet-cyan py-2 px-4 rounded bg-deep-space-blue">
-        Home
+      <li
+        class={`py-2 px-4 rounded bg-deep-space-blue ${$page.url.pathname === "/" ? "text-electric-blue " : "hover:text-electric-blue"}`}
+      >
+        <a href="/"> Home</a>
       </li>
-      <li class="hover:text-comet-cyan py-2 px-4 rounded bg-deep-space-blue">
-        About
+      <li
+        class={`py-2 px-4 rounded bg-deep-space-blue ${$page.url.pathname === "/about" ? "text-electric-blue " : "hover:text-electric-blue"}`}
+      >
+        <a href="/about"> About</a>
       </li>
-      <li class="hover:text-comet-cyan py-2 px-4 rounded bg-deep-space-blue">
-        Services
+      <li
+        class={`py-2 px-4 rounded bg-deep-space-blue ${$page.url.pathname === "/services" ? "text-electric-blue " : "hover:text-electric-blue"}`}
+      >
+        <a href="/services">Services</a>
       </li>
-      <li class="hover:text-comet-cyan py-2 px-4 rounded bg-deep-space-blue">
-        Contact
+      <li
+        class={`py-2 px-4 rounded bg-deep-space-blue ${$page.url.pathname === "/contact" ? "text-electric-blue " : "hover:text-electric-blue"}`}
+      >
+        <a href="/contact">Contact</a>
       </li>
     </ul>
 
