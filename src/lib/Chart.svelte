@@ -1,4 +1,7 @@
 <script>
+  import { onMount } from "svelte";
+  import { scale } from "svelte/transition";
+
   // Data for your company
   const data = [
     { category: "Price", value: 40, color: "#ca8a04" },
@@ -6,6 +9,33 @@
   ];
 
   const maxValue = Math.max(...data.map((d) => d.value));
+
+  let chartVisible = false;
+
+  onMount(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            chartVisible = true;
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const chartElement = document.querySelector(".chart");
+    if (chartElement) {
+      observer.observe(chartElement);
+    }
+
+    return () => {
+      if (chartElement) {
+        observer.unobserve(chartElement);
+      }
+    };
+  });
 </script>
 
 <div class="chart-container w-full">
@@ -15,11 +45,14 @@
       <div class="bar-container">
         <span class="bar-label">{item.category}</span>
         <div class="bar-wrapper">
-          <div
-            class="bar"
-            style="width: {(item.value / maxValue) *
-              100}%; background-color: {item.color}; height: 50px;"
-          ></div>
+          {#if chartVisible}
+            <div
+              class="bar"
+              style="width: {(item.value / maxValue) *
+                100}%; background-color: {item.color}; height: 50px;"
+              transition:scale={{ duration: 1000, start: 0, opacity: 1 }}
+            ></div>
+          {/if}
         </div>
       </div>
     {/each}
@@ -64,8 +97,7 @@
   }
 
   .bar {
-    height: 30px;
-    transition: width 0.5s ease-in-out;
+    height: 50px;
     position: relative;
   }
 </style>
