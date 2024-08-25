@@ -9,7 +9,7 @@
 </script>
 
 <nav
-  class="bg-deep-space-blue text-nova-white p-4 sticky top-0 left-0 w-full opacity-95"
+  class="bg-deep-space-blue text-nova-white p-4 relative top-0 left-0 w-full opacity-95"
 >
   <div class={`container mx-auto flex flex-wrap justify-between `}>
     <div class={`flex  ${isMenuOpen ? "max-md:hidden" : ""}`}>
